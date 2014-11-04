@@ -1,0 +1,47 @@
+body {
+	font-family: Calibri, Arial, Verdana;
+	font-size: 16px;	
+}
+
+#chat-room {
+	display: none;
+}
+
+#chat-content {
+	float: left;
+	width: 70%;
+	border: 1px solid black;
+	padding: 5px 5px;
+	max-height: 600px;
+	overflow: auto;
+}
+
+#user-list {
+	float: right;
+	width: 20%;
+	border: 1px solid black;
+	padding: 5px 5px;
+}
+
+.chat {
+	span {
+		padding-right: 5px;
+	}
+
+	.timestamp {
+		font-style: italic;
+	}
+
+	.username {
+		font-weight: bold;
+	}		
+
+}
+
+#enter-chat-message {
+	width: 70%;
+	input {
+		width: 100%;
+		border: 1px solid black;
+	}
+}

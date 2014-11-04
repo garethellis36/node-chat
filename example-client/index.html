@@ -1,0 +1,52 @@
+<html>
+
+	<head>
+		<title>NodeJS chat room</title>
+		<link rel="stylesheet" type="text/css" href="./dist/css/style.css">
+		<link rel="stylesheet" type="text/css" href="./dist/css/alertify.core.css">
+		<link rel="stylesheet" type="text/css" href="./dist/css/alertify.default.css">
+	</head>
+
+	<body>
+
+		<div id="join-chat">
+			<h3>Enter your name to join the chat</h3>
+			<form action="#" method="post">
+				<label>Name:</label>
+				<input type="text" name="name" />
+				<input type="submit" value="Enter chat" />
+			</form>
+		</div>
+
+		<div id="chat-room">
+
+			<h3>Gareth's NodeJS-powered chat room!</h3>
+
+			<div id="leave-chat">
+				<a href="#">
+					Leave chat
+				</a>
+			</div>	
+
+			<div id="chat-content">
+
+			</div>
+
+			<div id="user-list">
+			</div>
+
+			<div id="enter-chat-message">
+				<form>
+					<input type="text" name="message" placeholder="Chat here..." />
+				</form>
+			</div>
+		
+		</div>
+
+	</body>
+
+	<script type="text/javascript" src="./dist/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./dist/js/alertify.min.js"></script>
+	<script type="text/javascript" src="./dist/js/app.js"></script>
+
+</html>

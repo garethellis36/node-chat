@@ -1,0 +1,34 @@
+{
+  "name": "garethellis-node-chat",
+  "version": "0.0.1",
+  "description": "Basic NodeJS chat room",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "express": "^4.10.1",
+    "express-session": "^1.9.1",
+    "garethellis-server-sent-events": "0.0.4",
+    "lodash": "^2.4.1",
+    "node-event-emitter": "0.0.1"
+  },
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^0.16.1"
+  },
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "chat",
+    "chat",
+    "room"
+  ],
+  "author": "garethellis <garethellis+npm@gmail.com>",
+  "license": "MIT"
+}
