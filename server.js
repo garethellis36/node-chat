@@ -2,6 +2,7 @@ var _ = require("lodash");
 var chat = require("./chat.js");
 var sse = require("./sse.js");
 var express = require("express");
+var validator = require("validator");
 
 var app = express();
 
@@ -27,11 +28,11 @@ app.post("/user", function (req, res) {
 	}
 
 	chat.join({
-		name: req.body.name
+		name: sanitize(req.body.name)
 	},
 	function (err, user) {
 		if (err) {
-			return res.status(500).send({error:'Failed to connect'}).end();
+			return res.status(500).send({error: err}).end();
 		}
 		req.session.userId = user.id;
 		return res.status(200).send(user);
@@ -91,7 +92,7 @@ app.post("/chat", function (req, res) {
 	} else {
 		chat.newMessage({
 			userid: userId,
-			message: req.body.message
+			message: sanitize(req.body.message)
 		},
 		function (err, msg) {
 			if (err) {
@@ -117,10 +118,16 @@ app.get("/events", function(req, res) {
 
   function handleEvent(event) {
     console.log("sending '%s'", event.name);
-    sse(res, "chatEvent", event);
+    sse(res, event.name, event);
   }
 });
 
+function sanitize(input) {
+	input = validator.toString(input);
+	input = validator.trim(input);
+	input = validator.escape(input);
+	return input;
+}
 
 if (require.main === module) {
   app.listen(3000, function() {

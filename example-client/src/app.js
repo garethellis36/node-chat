@@ -42,13 +42,17 @@
 				
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				alertify.error('Failed to connect to chat server');
+				alertify.error('Failed to connect to chat server. Server could be full or not available.');
 			}
 		});
 
 	});
 
 	function initSseHandlers() {
+
+		eventSource.onmessage = function(e) {
+			console.log(e);
+		}
 
 		//on join event, update users list
 		eventSource.addEventListener('join', function(e) {
@@ -62,7 +66,9 @@
 
 		//on chat event, add chat message to chat window
 		eventSource.addEventListener('chat', function(e) {
-			addChatMessage(e.data);
+			var data = JSON.parse(e.data);
+			var msg = data.message;
+			addChatMessage(msg);
 		}, false);
 
 		//error handler
@@ -227,6 +233,7 @@
 
 	function shutDownEventSource() {
 		chatContainer.slideUp();
+		chatContent.html('');
 		joinChat.slideDown();
 		eventSource.close();
 		eventSource = null;		

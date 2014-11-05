@@ -9,7 +9,7 @@ var EVENT_HANDLERS = {
 	chat: chat
 }
 
-var MAX_USERS = 16;
+var MAX_USERS = 2;
 exports.setMaxListeners(16);
 var eventId = 1;
 
@@ -57,19 +57,26 @@ function handleEvent(event) {
 }
 
 function join(data, callback) {
-	var user = {
-    id: _.uniqueId(),
-    name: data.name,
-    inChat: true
+
+  var numUsers = chat.users.length;
+
+  if (numUsers <= MAX_USERS) {
+  	var user = {
+      id: _.uniqueId(),
+      name: data.name,
+      inChat: true
+    }
+
+    chat.users[user.id] = user;
+
+    var message = addMessage('User ' + data.name + ' joined the chat');
+
+  	callback(null, user);
+
+  	emit(event("join", {user: user}));
+  } else {
+    callback(new Error('Chat room full'), null);
   }
-
-  chat.users[user.id] = user;
-
-  var message = addMessage('User ' + data.name + ' joined the chat');
-
-	callback(null, user);
-
-	emit(event("join", {user: user}));
 }
 
 function leave(data, callback) {

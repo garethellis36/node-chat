@@ -9,7 +9,8 @@
     "express-session": "^1.9.1",
     "garethellis-server-sent-events": "0.0.4",
     "lodash": "^2.4.1",
-    "node-event-emitter": "0.0.1"
+    "node-event-emitter": "0.0.1",
+    "validator": "^3.22.1"
   },
   "devDependencies": {
     "bower": "^1.3.12",
