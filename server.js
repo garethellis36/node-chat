@@ -16,6 +16,13 @@ app.use(require("express-session")({
   saveUninitialized: true,
 }));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, userId");
+  res.header("Access-Control-Allow-Methods", "POST,GET,DELETE");
+  next();
+});
+
 //handle user joining chat
 app.post("/user", function (req, res) {
 	

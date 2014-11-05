@@ -9,7 +9,7 @@ var EVENT_HANDLERS = {
 	chat: chat
 }
 
-var MAX_USERS = 2;
+var MAX_USERS = 16;
 exports.setMaxListeners(16);
 var eventId = 1;
 
