@@ -10,6 +10,7 @@ var EVENT_HANDLERS = {
 }
 
 var MAX_USERS = 16;
+exports.setMaxListeners(16);
 var eventId = 1;
 
 var chat = {
@@ -90,7 +91,7 @@ function leave(data, callback) {
 
 function newMessage(data, callback) {
 
-  var message = addMessage(data.message, data.userid);
+  var message = addMessage(data.message, chat.users[data.userid].name);
 
   callback(null, message);
 }
@@ -113,14 +114,14 @@ function emit(event) {
   exports.emit("chatEvent", event);
 }
 
-function addMessage(msg, userid) {
+function addMessage(msg, username) {
 
-  userid = userid || SYSTEM_USER_ID;
+  username = username || chat.users[SYSTEM_USER_ID].name;
 
   var message = {
     id: _.uniqueId("chatMessage"),
     text: msg,
-    userid: userid,
+    username: username,
     timestamp: new Date()
   };
 

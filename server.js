@@ -106,7 +106,7 @@ app.post("/chat", function (req, res) {
 
 app.get("/events", function(req, res) {
 
-  var send = sse.start(res);
+  sse.start(res);
 
   sse(res, "connected", {});
   chat.addListener("chatEvent", handleEvent);
@@ -116,7 +116,6 @@ app.get("/events", function(req, res) {
   });
 
   function handleEvent(event) {
-  	console.log(event);
     console.log("sending '%s'", event.name);
     sse(res, "chatEvent", event);
   }
