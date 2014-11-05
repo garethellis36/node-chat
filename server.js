@@ -34,10 +34,7 @@ app.post("/user", function (req, res) {
 			return res.status(500).send({error:'Failed to connect'}).end();
 		}
 		req.session.userId = user.id;
-
-		sse.start(res);
-		sse(res, "userJoinedChat", user);
-		res.status(200).send(user);
+		return res.status(200).send(user);
 	});	
 
 });
@@ -104,6 +101,25 @@ app.post("/chat", function (req, res) {
 			return res.status(200).send({message: msg});
 		});
 	}
+});
+
+
+app.get("/events", function(req, res) {
+
+  var send = sse.start(res);
+
+  sse(res, "connected", {});
+  chat.addListener("chatEvent", handleEvent);
+
+  res.on("end", function() {
+    chat.removeListener("chatEvent", handleEvent);
+  });
+
+  function handleEvent(event) {
+  	console.log(event);
+    console.log("sending '%s'", event.name);
+    sse(res, "chatEvent", event);
+  }
 });
 
 

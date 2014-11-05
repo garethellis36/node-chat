@@ -5,11 +5,7 @@
 
 	var serverEndpoint = "http://localhost:3000";
 
-	var eventSource = new EventSource(serverEndpoint);
-
-	eventSource.addEventListener("userJoinedChat", function(e) {
-		loadUserList();
-	});
+	var eventSource;
 
 	var months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
@@ -26,6 +22,10 @@
 			success: function (data, textStatus, jqXHR) {
 				
 				if (data.id) {
+
+					eventSource = new EventSource(serverEndpoint + '/events');
+					initSseHandlers();
+
 					user = data;
 					loadChat(data);
 				}
@@ -41,6 +41,14 @@
 		});
 
 	});
+
+	function initSseHandlers() {
+
+		eventSource.onmessage = function(e) {
+			console.log(e);
+		};
+
+	}
 
 	$('#enter-chat-message input').keyup(function (e) {
 		e.preventDefault();
@@ -186,6 +194,8 @@
 				alertify.success("You have left the chat");
 				$('#chat-room').slideUp();
 				$('#join-chat').slideDown();
+				eventSource.close();
+				eventSource = null;
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				alertify.alert(textStatus);

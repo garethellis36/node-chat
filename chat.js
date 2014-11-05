@@ -93,8 +93,6 @@ function newMessage(data, callback) {
   var message = addMessage(data.message, data.userid);
 
   callback(null, message);
-
-  emit(event("chat", {message: message}));
 }
 
 function state() {
@@ -127,6 +125,7 @@ function addMessage(msg, userid) {
   };
 
   if (chat.chat.push(message)) {
+    emit(event("chat", {message: message}));
     return message;
   } else {
     return false;
