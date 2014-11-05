@@ -41,14 +41,3 @@ The following SSEs are sent and can be listened to by the client:
 'join' - on new user joining  
 'leave' - on user leaving  
 'chat' - on posting of new message
-
-
-client
-======
-
-An example client is provided in example-client/. To use:
-
-bower install  
-grunt
-
-Then open index.html in browser (web server not required).
