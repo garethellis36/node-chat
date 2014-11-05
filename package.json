@@ -1,6 +1,6 @@
 {
   "name": "garethellis-node-chat",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Basic NodeJS chat room",
   "main": "server.js",
   "dependencies": {
