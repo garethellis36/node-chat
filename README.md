@@ -6,7 +6,7 @@ Basic NodeJS chat server.
 usage
 =====
 
-npm install
+npm install  
 node server.js
 
 endpoints
@@ -30,7 +30,7 @@ client
 
 An example client is provided in example-client/. To use:
 
-bower install
+bower install  
 grunt
 
 Then open index.html in browser (web server not required).
